@@ -30,9 +30,9 @@ class FtpClientExtension extends Extension
                 if (!isset($defaultsConfig[$clientConfig['default']])) {
                     throw new \Exception('The default config ' . $clientConfig['default'] . "doesn't exists");
                 }
+                $clientConfig = array_merge($defaultsConfig[$clientConfig['default']], $clientConfig);
             }
 
-            $clientConfig = array_merge($defaultsConfig[$clientConfig['default']], $clientConfig);
             $definition = $this->buildDefinition($clientConfig);
             $container->setDefinition("tbcd.ftp_client.$clientName", $definition);
             $container->setAlias("$clientName.ftp_client", "tbcd.ftp_client.$clientName")
